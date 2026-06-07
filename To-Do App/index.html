@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>To-Do List</h1>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num p" id="statPending">0</div>
+          <div class="stat-lbl">Pending</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num d" id="statDone">0</div>
+          <div class="stat-lbl">Done</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="statTotal">0</div>
+          <div class="stat-lbl">Total</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <div class="form-card">
+        <h2>Add New Task</h2>
+        <div class="field">
+          <label>Title *</label>
+          <input type="text" id="fTitle" placeholder="What needs to be done?" />
+          <div class="err-msg" id="errTitle">Title is required.</div>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="fDesc" placeholder="Add details (optional)…"></textarea>
+        </div>
+        <div class="priority-row">
+          <div class="field">
+            <label>Priority</label>
+            <select id="fPriority">
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Category</label>
+            <input type="text" id="fCat" placeholder="e.g. Work, Health" />
+          </div>
+        </div>
+        <button class="btn-save" onclick="addTask()">Add Task</button>
+      </div>
+
+      <div class="lists">
+        <div class="section pending" id="secPending">
+          <div class="section-head">
+            <h2><span class="dot"></span> Pending Tasks</h2>
+            <span class="badge" id="badgePending">0 tasks</span>
+          </div>
+          <div id="listPending">
+            <div class="empty-state">
+              No pending tasks — you're all caught up!
+            </div>
+          </div>
+        </div>
+
+        <div class="section done" id="secDone">
+          <div class="section-head">
+            <h2><span class="dot"></span> Completed Tasks</h2>
+            <span class="badge" id="badgeDone">0 tasks</span>
+          </div>
+          <div id="listDone">
+            <div class="empty-state">Completed tasks will appear here.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeModal(event)">
+      <div class="modal" id="modal">
+        <h2>Edit Task</h2>
+        <div class="field">
+          <label>Title *</label>
+          <input type="text" id="mTitle" />
+          <div class="err-msg" id="mErrTitle">Title is required.</div>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="mDesc"></textarea>
+        </div>
+        <div class="priority-row">
+          <div class="field">
+            <label>Priority</label>
+            <select id="mPriority">
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Category</label>
+            <input type="text" id="mCat" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-modal cancel" onclick="closeModal()">
+            Cancel
+          </button>
+          <button class="btn-modal save" onclick="saveEdit()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </body>
+</html>
